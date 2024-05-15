@@ -8,7 +8,7 @@ import {
   TableBody,
   Table
 } from '@/components/ui/table';
-import { Button } from '@/components/ui/startButton';
+import { StartButton } from '@/components/ui/startButton';
 import { SelectUser } from '@/lib/db';
 import { deleteUser } from './actions';
 import { useRouter } from 'next/navigation';
@@ -46,13 +46,13 @@ export function UsersTable({
         </Table>
       </form>
       {offset !== null && (
-        <Button
+        <StartButton
           className="mt-4 w-40"
           variant="secondary"
           onClick={() => onClick()}
         >
           Next Page
-        </Button>
+        </StartButton>
       )}
     </>
   );
@@ -68,7 +68,7 @@ function UserRow({ user }: { user: SelectUser }) {
       <TableCell className="hidden md:table-cell">{user.email}</TableCell>
       <TableCell>{user.username}</TableCell>
       <TableCell>
-        <Button
+        <StartButton
           className="w-full"
           size="sm"
           variant="outline"
@@ -76,7 +76,7 @@ function UserRow({ user }: { user: SelectUser }) {
           disabled
         >
           Delete
-        </Button>
+        </StartButton>
       </TableCell>
     </TableRow>
   );
