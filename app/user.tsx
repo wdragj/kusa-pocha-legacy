@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { NextUIButton } from '@/components/ui/buttons';
 import { auth, signIn, signOut } from '@/lib/auth';
 import Image from 'next/image';
 
@@ -15,7 +15,15 @@ export async function User() {
           await signIn('kakao');
         }}
       >
-        <Button variant="outline">Sign In</Button>
+        <NextUIButton
+          divClassName=""
+          className="px-8"
+          type="submit"
+          text="Sign In"
+          color="default"
+          size="md"
+          radius="md"
+        />
       </form>
     );
   }
@@ -36,7 +44,15 @@ export async function User() {
           await signOut();
         }}
       >
-        <Button variant="outline">Sign Out</Button>
+        <NextUIButton
+          divClassName=""
+          className="px-6"
+          type="submit"
+          text="Sign Out"
+          color="default"
+          size="md"
+          radius="md"
+        />
       </form>
     </div>
   );

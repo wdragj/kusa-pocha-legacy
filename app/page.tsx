@@ -1,4 +1,5 @@
-import { Button } from '@/components/ui/button';
+import { StartButton } from '@/components/ui/startButton';
+import { NextUIButton } from '@/components/ui/buttons';
 import Link from 'next/link';
 import { auth, signIn } from '@/lib/auth';
 
@@ -19,12 +20,15 @@ export default async function LoginPage() {
             await signIn('kakao');
           }}
         >
-          <Button
-            className="text-3xl text-white font-bold bg-[#C5050C] hover:white rounded-full py-6 px-12 shadow"
-            variant="outline"
-          >
-            Get Started
-          </Button>
+          <NextUIButton
+            divClassName="items-center"
+            className="px-16 bg-[#C5050C] text-3xl font-bold"
+            type="submit"
+            text="Get Started"
+            color="danger"
+            size="lg"
+            radius="full"
+          />
         </form>
       </main>
     );
@@ -36,12 +40,12 @@ export default async function LoginPage() {
         쿠사 포차에 오신걸 황영합니다!
       </h1>
       <Link href="/dashboard">
-        <Button
-          className="text-3xl text-white font-bold bg-[#C5050C] hover:white rounded-full py-6 px-12 shadow"
+        <StartButton
+          className="text-3xl text-white font-bold bg-[#C5050C] rounded-full py-6 px-12 shadow"
           variant="outline"
         >
           Start Ordering
-        </Button>
+        </StartButton>
       </Link>
     </main>
   );

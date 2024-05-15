@@ -1,9 +1,17 @@
-import 'server-only';
+// import 'server-only';
 
 import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
-import { pgTable, serial, varchar } from 'drizzle-orm/pg-core';
+import {
+  pgTable,
+  serial,
+  text,
+  numeric,
+  timestamp,
+  varchar
+} from 'drizzle-orm/pg-core';
 import { eq, ilike } from 'drizzle-orm';
+import { create } from 'domain';
 
 export const db = drizzle(
   neon(process.env.POSTGRES_URL!, {
@@ -12,6 +20,8 @@ export const db = drizzle(
     }
   })
 );
+
+// Users table
 
 const users = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -52,4 +62,23 @@ export async function getUsers(
 
 export async function deleteUserById(id: number) {
   await db.delete(users).where(eq(users.id, id));
+}
+
+// Menus table
+
+const menus = pgTable('menus', {
+  id: serial('id'),
+  name: text('name').notNull(),
+  price: numeric('price', { precision: 5, scale: 2 }).notNull(),
+  organization: text('organization').notNull(),
+  img: text('img'),
+  createdAt: timestamp('created_at').defaultNow().notNull()
+});
+
+export type SelectMenu = typeof menus.$inferSelect;
+
+export async function getMenus() {
+  const menuData = await db.select().from(menus);
+  console.log('DB Results', menuData);
+  return menuData;
 }
